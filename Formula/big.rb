@@ -1,27 +1,27 @@
 class Big < Formula
   desc "Manage your big (itsjustbig.com) Instagram DM inbox and automations"
   homepage "https://itsjustbig.com"
-  version "2.6.0"
+  version "2.7.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/D-C-Collectibles/homebrew-big/releases/download/cli-v2.6.0/big-darwin-arm64.tar.gz"
-      sha256 "6d9a7e158fd07062af4f5bf0c82888beed692f17d4c67a1d35902019c03e7d55"
+      url "https://github.com/D-C-Collectibles/homebrew-big/releases/download/cli-v2.7.0/big-darwin-arm64.tar.gz"
+      sha256 "2fcd76999e0c2b8b6560f26be169b49b68f3f9747cf54631a34737fcdefd95e2"
     end
     on_intel do
-      url "https://github.com/D-C-Collectibles/homebrew-big/releases/download/cli-v2.6.0/big-darwin-x64.tar.gz"
-      sha256 "d001f91dec7461512fa554672f93333c4394b10a868a13aa34a6f74ba6a1baf0"
+      url "https://github.com/D-C-Collectibles/homebrew-big/releases/download/cli-v2.7.0/big-darwin-x64.tar.gz"
+      sha256 "733c03f38d99f5531e1421247e09bdaa353ee727d8ba6b0463c78a5aeefb8403"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/D-C-Collectibles/homebrew-big/releases/download/cli-v2.6.0/big-linux-arm64.tar.gz"
-      sha256 "bba61bdb4141c1ea2c6e38043c7e3cb79481a535bd55fe2d98b9357300c5de00"
+      url "https://github.com/D-C-Collectibles/homebrew-big/releases/download/cli-v2.7.0/big-linux-arm64.tar.gz"
+      sha256 "1dfbc8e32b00d43e9347fb4d315d52a96c51d5e84b60d6cb1ad885045295cf08"
     end
     on_intel do
-      url "https://github.com/D-C-Collectibles/homebrew-big/releases/download/cli-v2.6.0/big-linux-x64.tar.gz"
-      sha256 "f85242e892f246c7339347426635ee45da265c31c5f7cd134e6349afb17ab42f"
+      url "https://github.com/D-C-Collectibles/homebrew-big/releases/download/cli-v2.7.0/big-linux-x64.tar.gz"
+      sha256 "cd488f5bbf9f615e5b9b129dc3bcd0abbaec3c163706303a254f8444040ae9cc"
     end
   end
 
