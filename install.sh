@@ -24,15 +24,36 @@ esac
 
 asset="big-$os-$arch.tar.gz"
 url="https://github.com/$REPO/releases/latest/download/$asset"
+checksums_url="https://github.com/$REPO/releases/latest/download/checksums.txt"
 
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 echo "Downloading $asset…"
-if ! curl -fsSL "$url" -o "$tmp/$asset"; then
+if ! curl --proto '=https' --tlsv1.2 -fsSL "$url" -o "$tmp/$asset"; then
   echo "Download failed: $url" >&2
   echo "No release for $os-$arch yet? See https://github.com/$REPO/releases" >&2
   exit 1
 fi
+if ! curl --proto '=https' --tlsv1.2 -fsSL "$checksums_url" -o "$tmp/checksums.txt"; then
+  echo "Could not download checksums.txt to verify $asset: $checksums_url" >&2
+  exit 1
+fi
+
+expected="$(awk -v f="$asset" '$2==f {print $1}' "$tmp/checksums.txt")"
+if [ -z "$expected" ]; then
+  echo "checksums.txt has no entry for $asset — refusing to install an unverified binary." >&2
+  exit 1
+fi
+if command -v sha256sum >/dev/null 2>&1; then
+  actual="$(sha256sum "$tmp/$asset" | awk '{print $1}')"
+else
+  actual="$(shasum -a 256 "$tmp/$asset" | awk '{print $1}')"
+fi
+if [ "$actual" != "$expected" ]; then
+  echo "Checksum mismatch for $asset (expected $expected, got $actual) — refusing to install." >&2
+  exit 1
+fi
+echo "✓ Verified $asset (sha256 $actual)"
 
 tar -xzf "$tmp/$asset" -C "$tmp"
 mkdir -p "$INSTALL_DIR"
